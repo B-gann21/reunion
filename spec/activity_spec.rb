@@ -2,11 +2,11 @@ require './lib/activity'
 require 'rspec'
 
 RSpec.describe Activity do
-  context 'Iteration 1' do
     before :each do
       @activity = Activity.new("Brunch")
     end
 
+  context 'Iteration 1' do
     it 'activity exists' do
       expect(@activity).to be_an_instance_of(Activity)
     end
@@ -39,6 +39,20 @@ RSpec.describe Activity do
       @activity.add_participant("Maria", 20)
       @activity.add_participant("Luther", 40)
       expect(@activity.total_cost).to eq(60)
+    end
+  end
+
+  context 'Iteration 2' do
+    it 'activity can split the cost between participants' do
+      @activity.add_participant("Maria", 20)
+      @activity.add_participant("Luther", 40)
+      expect(@activity.split).to eq(30)
+    end
+
+    it 'activity can return the amount owed to each participant' do
+      @activity.add_participant("Maria", 20)
+      @activity.add_participant("Luther", 40)
+      expect(@activity.owed).to eq({"Maria" => 10, "Luther" => -10})
     end
   end
 end
